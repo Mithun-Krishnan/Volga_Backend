@@ -2,11 +2,13 @@ package com.example.volgaProject.common.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @MappedSuperclass
+@Getter
 public  abstract class BaseEntity {
 
     @Id

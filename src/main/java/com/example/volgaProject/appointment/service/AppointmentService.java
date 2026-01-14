@@ -2,6 +2,7 @@ package com.example.volgaProject.appointment.service;
 
 import com.example.volgaProject.appointment.dto.TimeSlotDTO;
 import com.example.volgaProject.appointment.entity.AppointmentEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,7 +11,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface AppointmentService {
-    UUID requestAppointment(UUID clientId, LocalDateTime appointmentDate, LocalDateTime startTime, LocalTime endTime);
+    UUID requestAppointment(UUID clientId, LocalDate appointmentDate, LocalTime startTime, LocalTime endTime);
+
+
     void confirmAppointment(UUID appointmentId);
     void cancelAppointment(UUID appointmentId);
     void completeAppointment(UUID appointmnetId);
