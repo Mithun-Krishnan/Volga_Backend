@@ -13,8 +13,9 @@ public  abstract class BaseEntity {
 
     @Id
     @GeneratedValue
-    @Column(nullable = false,updatable = false)
-    UUID id;
+    @org.hibernate.annotations.UuidGenerator
+    @Column(nullable = false, updatable = false)
+    private UUID id;
 
     @Column(nullable = false,updatable = false)
     LocalDateTime createdAt;

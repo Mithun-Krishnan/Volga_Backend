@@ -22,4 +22,5 @@ public interface AppointmentRepository extends JpaRepository<AppointmentEntity, 
 
     List<AppointmentEntity> findByClientId(UUID clientId);
 
+
 }
