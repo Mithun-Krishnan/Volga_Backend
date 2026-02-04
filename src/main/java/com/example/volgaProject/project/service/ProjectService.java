@@ -14,6 +14,8 @@ public interface ProjectService {
     void cancelProject(UUID projectId);
 //    void onHoldProject(UUID projectId);
     void updateEstimate(UUID projectId,BigDecimal estimateAmt);
+    ProjectStatus getStatus(UUID prjectId);
+    BigDecimal getActualAmount(UUID projectId);
 
 
 //    List<ProjectEntity> getProjectByClient(UUID clientId);   no longer use the clinet id in entity
@@ -21,5 +23,5 @@ public interface ProjectService {
     List<ProjectEntity> getProjectByStatus(ProjectStatus status);
 
 
-
+    BigDecimal getEstimatedAmount(UUID projectId);
 }

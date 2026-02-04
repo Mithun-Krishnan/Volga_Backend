@@ -4,6 +4,7 @@ import com.example.volgaProject.common.entity.BaseEntity;
 import com.example.volgaProject.exception.BusinessRuleException;
 import com.example.volgaProject.project.enums.ProjectStatus;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -13,6 +14,7 @@ import java.util.UUID;
 //        @Index(name = "idx_project_client_id",columnList = "clientId"),
         @Index(name = "idx_project_status",columnList = "status")
 })
+@Getter
 public class ProjectEntity extends BaseEntity {
 //    @Column(nullable = true)
 //    private UUID clientId;

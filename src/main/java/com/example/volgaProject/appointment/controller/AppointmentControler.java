@@ -2,6 +2,7 @@ package com.example.volgaProject.appointment.controller;
 
 import com.example.volgaProject.appointment.dto.TimeSlotDTO;
 import com.example.volgaProject.appointment.service.AppointmentService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -10,8 +11,10 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/v1/appointment")
 public class AppointmentControler {
     private final AppointmentService appointmentService;
+
 
     public AppointmentControler(AppointmentService appointmentService) {
         this.appointmentService = appointmentService;
@@ -19,6 +22,7 @@ public class AppointmentControler {
 
     // 1. Create appointment
     @PostMapping
+    @PreAuthorize("hasAnyRole('CLIENT')")
     public UUID create(
             @RequestParam UUID clientId,
             @RequestParam LocalDate date,

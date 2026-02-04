@@ -2,6 +2,7 @@ package com.example.volgaProject.appointment.entity;
 
 import com.example.volgaProject.appointment.enums.AppointmentStatus;
 import com.example.volgaProject.common.entity.BaseEntity;
+import com.example.volgaProject.exception.BusinessRuleException;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.UuidGenerator;
@@ -51,21 +52,21 @@ public class AppointmentEntity extends BaseEntity {
 
     public void confirm(){
         if(this.status!=AppointmentStatus.REQUESTED){
-            throw new IllegalStateException("Only REQUESTED appointment can be confirmed");
+            throw new BusinessRuleException("Only REQUESTED appointment can be confirmed");
         }
         this.status=AppointmentStatus.CONFIRMED;
     }
 
     public void cancel() {
         if (this.status == AppointmentStatus.COMPLETED) {
-            throw new IllegalStateException("Completed appointment cannot be cancelled");
+            throw new BusinessRuleException("Completed appointment cannot be cancelled");
         }
         this.status = AppointmentStatus.CANCELLED;
     }
 
     public void complete() {
         if (this.status != AppointmentStatus.CONFIRMED) {
-            throw new IllegalStateException("Only CONFIRMED appointment can be completed");
+            throw new BusinessRuleException("Only CONFIRMED appointment can be completed");
         }
         this.status = AppointmentStatus.COMPLETED;
     }

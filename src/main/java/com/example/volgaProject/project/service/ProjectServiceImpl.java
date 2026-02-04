@@ -20,6 +20,17 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Transactional
 public class ProjectServiceImpl implements ProjectService{
+    @Override
+    public ProjectStatus getStatus(UUID prjectId) {
+        ProjectEntity projectEntity=loadProject(prjectId);
+        return projectEntity.getStatus();
+    }
+
+    @Override
+    public BigDecimal getActualAmount(UUID projectId) {
+        ProjectEntity projectEntity=loadProject(projectId);
+        return projectEntity.getActualCost();
+    }
 
     final ProjectRepository projectRepository;
     final AppointmentService appointmentService;
@@ -43,9 +54,7 @@ public class ProjectServiceImpl implements ProjectService{
 
     @Override
     public void startProject(UUID projectId) {
-        ProjectEntity projectEntity=projectRepository.findById(projectId).orElseThrow(
-                ()->new NotFoundException("no project in this is")
-        );
+        ProjectEntity projectEntity=loadProject(projectId);
         projectEntity.startProject();
     }
 
@@ -73,6 +82,12 @@ public class ProjectServiceImpl implements ProjectService{
     @Transactional(readOnly = true)
     public List<ProjectEntity> getProjectByStatus(ProjectStatus status) {
         return projectRepository.findByStatus(status);
+    }
+
+    @Override
+    public BigDecimal getEstimatedAmount(UUID projectId) {
+        ProjectEntity projectEntity=loadProject(projectId);
+        return projectEntity.getEstimatedCost();
     }
 
 
